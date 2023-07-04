@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SimpleCalculator</string>
+    <string name="button1text">1</string>
+    <string name="button2text">2</string>
+    <string name="button3text">3</string>
+    <string name="button4text">4</string>
+    <string name="button5text">5</string>
+    <string name="button6text">6</string>
+    <string name="button7text">7</string>
+    <string name="button8text">8</string>
+    <string name="button9text">9</string>
+    <string name="button0text">0</string>
+    <string name="buttonEqualsText">=</string>
+    <string name="buttonDivisionText">÷</string>
+    <string name="buttonMultiText">×</string>
+    <string name="buttonPlusText">+</string>
+    <string name="buttonMinusText">-</string>
+    <string name="buttonClearText">C</string>
+    <string name="buttonDotText">.</string>
+    <string name="screenText">0</string>
+    <string name="switchText">DarkMode</string>
+</resources>

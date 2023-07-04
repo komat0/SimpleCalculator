@@ -1,0 +1,8 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.SimpleCalculator" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimaryDark">@color/actionButtons</item>
+        <item name="colorAccent">@color/buttonsTextColor</item>
+        <item name="android:colorButtonNormal">@color/digitButtons</item>
+    </style>
+
+</resources>

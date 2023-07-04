@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="button_to_top">10dp</dimen>
+    <dimen name="button_to_bottom">10dp</dimen>
+    <dimen name="button_equals_size">300dp</dimen>
+    <dimen name="button_equals_to_bottom">20dp</dimen>
+    <dimen name="button_to_next_button">6dp</dimen>
+    <dimen name="screen_to_top">120dp</dimen>
+    <dimen name="screen_text_size">90sp</dimen>
+    <dimen name="button_text_size">40sp</dimen>
+    <dimen name="constraintGuideLineVertical">10dp</dimen>
+    <dimen name="constraintGuideLineHorizontal">100dp</dimen>
+    <dimen name="switchTextSize">15sp</dimen>
+    <dimen name="button_to_bottom_land">2dp</dimen>
+    <dimen name="screen_text_size_land">70sp</dimen>
+    <dimen name="screen_to_buttons_land">16dp</dimen>
+    <dimen name="button_text_size_land">25sp</dimen>
+    <dimen name="equals_to_buttons_land">15dp</dimen>
+    <dimen name="equals_to_bottom_land">5dp</dimen>
+    <dimen name="constraintGuideLine_start_and_end_land">50dp</dimen>
+    <dimen name="constraintGuideLine_bottom_land">60dp</dimen>
+    <dimen name="constraintGuideLine_top_land">100dp</dimen>
+</resources>
