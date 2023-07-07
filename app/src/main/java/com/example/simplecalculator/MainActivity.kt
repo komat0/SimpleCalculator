@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import com.google.android.material.switchmaterial.SwitchMaterial
 
 class MainActivity : AppCompatActivity() {
@@ -153,12 +154,14 @@ class MainActivity : AppCompatActivity() {
 
     fun onClickSwitcher(view: View) {
         if (darkModeSwitcher.isChecked) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             Toast.makeText(
                 applicationContext,
                 "Ночной режим Активирован!",
                 Toast.LENGTH_SHORT
             ).show()
         } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             Toast.makeText(
                 applicationContext,
                 "Ночной режим Деактивирован!",

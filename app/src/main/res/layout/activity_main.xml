@@ -52,11 +52,13 @@
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="calculatorScreenText" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button1"
+        style="@style/DigitalButtonStyle.ButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/button_to_next_button"
+        android:layout_marginBottom="@dimen/button_to_next_button"
         android:onClick="onClickAnyButton"
         android:text="@string/button1text"
         android:textSize="@dimen/button_text_size"
@@ -68,11 +70,13 @@
         app:layout_constraintTop_toBottomOf="@id/screenBarrier"
         app:layout_constraintVertical_chainStyle="packed" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button2"
+        style="@style/DigitalButtonStyle.ButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/button_to_next_button"
+        android:layout_marginBottom="@dimen/button_to_next_button"
         android:onClick="onClickAnyButton"
         android:text="@string/button2text"
         android:textSize="@dimen/button_text_size"
@@ -83,11 +87,13 @@
         app:layout_constraintTop_toBottomOf="@id/screenBarrier"
         app:layout_constraintVertical_chainStyle="packed" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button3"
+        style="@style/DigitalButtonStyle.ButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/button_to_next_button"
+        android:layout_marginBottom="@dimen/button_to_next_button"
         android:onClick="onClickAnyButton"
         android:text="@string/button3text"
         android:textSize="@dimen/button_text_size"
@@ -98,10 +104,12 @@
         app:layout_constraintTop_toBottomOf="@id/screenBarrier"
         app:layout_constraintVertical_chainStyle="packed" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonDivision"
+        style="@style/ActionsButtonsStyle.ButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/button_to_next_button"
         android:onClick="onClickAnyButton"
         android:text="@string/buttonDivisionText"
         android:textSize="@dimen/button_text_size"
@@ -112,11 +120,13 @@
         app:layout_constraintTop_toBottomOf="@id/screenBarrier"
         app:layout_constraintVertical_chainStyle="packed" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button4"
+        style="@style/DigitalButtonStyle.ButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/button_to_next_button"
+        android:layout_marginBottom="@dimen/button_to_next_button"
         android:onClick="onClickAnyButton"
         android:text="@string/button4text"
         android:textSize="@dimen/button_text_size"
@@ -127,11 +137,13 @@
         app:layout_constraintStart_toStartOf="@id/content_start"
         app:layout_constraintTop_toBottomOf="@id/button1" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button5"
+        style="@style/DigitalButtonStyle.ButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/button_to_next_button"
+        android:layout_marginBottom="@dimen/button_to_next_button"
         android:onClick="onClickAnyButton"
         android:text="@string/button5text"
         android:textSize="@dimen/button_text_size"
@@ -141,11 +153,13 @@
         app:layout_constraintStart_toEndOf="@id/button4"
         app:layout_constraintTop_toBottomOf="@id/button2" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button6"
+        style="@style/DigitalButtonStyle.ButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/button_to_next_button"
+        android:layout_marginBottom="@dimen/button_to_next_button"
         android:onClick="onClickAnyButton"
         android:text="@string/button6text"
         android:textSize="@dimen/button_text_size"
@@ -155,10 +169,12 @@
         app:layout_constraintStart_toEndOf="@id/button5"
         app:layout_constraintTop_toBottomOf="@id/button3" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonMulti"
+        style="@style/ActionsButtonsStyle.ButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/button_to_next_button"
         android:onClick="onClickAnyButton"
         android:text="@string/buttonMultiText"
         android:textSize="@dimen/button_text_size"
@@ -168,11 +184,14 @@
         app:layout_constraintStart_toEndOf="@id/button6"
         app:layout_constraintTop_toBottomOf="@id/buttonDivision" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button7"
+        style="@style/DigitalButtonStyle.ButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/button_to_next_button"
+        android:layout_marginBottom="@dimen/button_to_next_button"
+        android:onClick="onClickAnyButton"
         android:text="@string/button7text"
         android:textSize="@dimen/button_text_size"
         android:textStyle="bold"
@@ -180,14 +199,15 @@
         app:layout_constraintEnd_toStartOf="@id/button8"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="@id/content_start"
-        app:layout_constraintTop_toBottomOf="@id/button4"
-        android:onClick="onClickAnyButton" />
+        app:layout_constraintTop_toBottomOf="@id/button4" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button8"
+        style="@style/DigitalButtonStyle.ButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/button_to_next_button"
+        android:layout_marginBottom="@dimen/button_to_next_button"
         android:onClick="onClickAnyButton"
         android:text="@string/button8text"
         android:textSize="@dimen/button_text_size"
@@ -197,11 +217,13 @@
         app:layout_constraintStart_toEndOf="@id/button7"
         app:layout_constraintTop_toBottomOf="@id/button5" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button9"
+        style="@style/DigitalButtonStyle.ButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/button_to_next_button"
+        android:layout_marginBottom="@dimen/button_to_next_button"
         android:onClick="onClickAnyButton"
         android:text="@string/button9text"
         android:textSize="@dimen/button_text_size"
@@ -211,10 +233,12 @@
         app:layout_constraintStart_toEndOf="@id/button8"
         app:layout_constraintTop_toBottomOf="@id/button6" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonPlus"
+        style="@style/ActionsButtonsStyle.ButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/button_to_next_button"
         android:onClick="onClickAnyButton"
         android:text="@string/buttonPlusText"
         android:textSize="@dimen/button_text_size"
@@ -224,8 +248,9 @@
         app:layout_constraintStart_toEndOf="@id/button9"
         app:layout_constraintTop_toBottomOf="@id/buttonMulti" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonClear"
+        style="@style/cAndDotButtonStyle.ButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/button_to_next_button"
@@ -239,8 +264,9 @@
         app:layout_constraintStart_toStartOf="@id/content_start"
         app:layout_constraintTop_toBottomOf="@id/button7" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button0"
+        style="@style/DigitalButtonStyle.ButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/button_to_next_button"
@@ -253,8 +279,9 @@
         app:layout_constraintStart_toEndOf="@id/buttonClear"
         app:layout_constraintTop_toBottomOf="@id/button8" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonEquals"
+        style="@style/EqualsButtonStyle.ButtonStyle"
         android:layout_width="@dimen/button_equals_size"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/button_to_next_button"
@@ -268,10 +295,12 @@
         app:layout_constraintStart_toStartOf="@id/content_start"
         app:layout_constraintTop_toBottomOf="@id/equals_Button_guideLine" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonMinus"
+        style="@style/ActionsButtonsStyle.ButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/button_to_next_button"
         android:onClick="onClickAnyButton"
         android:text="@string/buttonMinusText"
         android:textSize="@dimen/button_text_size"
@@ -281,8 +310,9 @@
         app:layout_constraintStart_toEndOf="@id/buttonDot"
         app:layout_constraintTop_toBottomOf="@id/buttonPlus" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonDot"
+        style="@style/cAndDotButtonStyle.ButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/button_to_next_button"
@@ -308,5 +338,17 @@
         app:layout_constraintStart_toStartOf="@+id/content_start"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.172" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/digitalButtons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="button1,button2,button3,button6,button5,button4,button7,button8,button9,button0" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/actionButtons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="buttonDivision,buttonMulti,buttonPlus,buttonMinus" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

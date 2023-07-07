@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="DigitalButtonStyle.ButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@color/digitButtons</item>
+        <item name="android:textColor">@color/buttonTextColor</item>
+    </style>
+
+    <style name="ActionsButtonsStyle.ButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@color/actionButtons</item>
+        <item name="android:textColor">@color/buttonTextColor</item>
+    </style>
+
+    <style name="EqualsButtonStyle.ButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@color/equalsButton</item>
+        <item name="android:textColor">@color/buttonTextColor</item>
+    </style>
+
+    <style name="cAndDotButtonStyle.ButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@color/cAndDotButtons</item>
+        <item name="android:textColor">@color/buttonTextColor</item>
+    </style>
+
+    <style name="screenTextColor" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">@color/screenTextColor</item>
+    </style>
+</resources>

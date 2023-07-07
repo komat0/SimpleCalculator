@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="digitButtons">#9EAEAEAE</color>
-    <color name="actionButtons">#5CB2F6</color>
-    <color name="fontTextColor">#7B058F</color>
-    <color name="buttonsTextColor">#BDAFBF</color>
+    <color name="buttonTextColor">#BDBDBD</color>
+    <color name="digitButtons">#9E454545</color>
+    <color name="actionButtons">#5E86A5</color>
+    <color name="equalsButton">#4B9F97</color>
+    <color name="cAndDotButtons">#9F8842</color>
+    <color name="screenTextColor">#FFFFFF</color>
 </resources>
