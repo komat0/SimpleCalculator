@@ -10,10 +10,13 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.google.android.material.switchmaterial.SwitchMaterial
 
 class MainActivity : AppCompatActivity() {
-
+    private val zero: String = "0"
+    private val zeroDot: String = "0."
+    private val empty: String = ""
+    private lateinit var memory: Memory
     private lateinit var calculatorScreenText: TextView
-    private lateinit var actionButtons: List<Button>
-    private lateinit var digitalButtons: List<Button>
+    private lateinit var operationButtons: List<Button>
+    private lateinit var numberButtons: List<Button>
     private lateinit var buttonDivision: Button
     private lateinit var buttonMulti: Button
     private lateinit var buttonPlus: Button
@@ -22,11 +25,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var buttonEquals: Button
     private lateinit var buttonClear: Button
     private lateinit var darkModeSwitcher: SwitchMaterial
-    private var digitalCollector: String = ""
-    private var digitalMemory: String = ""
-    private var actionButtonSign: Char = ' '
-    private var decimalClicked: Boolean = false
-    private var textViewValueCopyByTap = ""
+    private var textViewValueCopyByTap = empty
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,103 +52,83 @@ class MainActivity : AppCompatActivity() {
         val button9: Button = findViewById(R.id.button9)
 
         calculatorScreenText = findViewById(R.id.calculatorScreenText)
+
         darkModeSwitcher = findViewById(R.id.darkModeSwitch)
 
-        digitalButtons = listOf(
+        numberButtons = listOf(
             button0, button1, button2, button3, button4,
             button5, button6, button7, button8, button9
         )
-        actionButtons = listOf(
+        operationButtons = listOf(
             buttonDivision, buttonMulti, buttonPlus, buttonMinus
         )
+
+        if (savedInstanceState != null) {
+            memory = savedInstanceState.getParcelable(MEMORY_KEY) ?: Memory()
+            calculatorScreenText.text =
+                savedInstanceState.getString(CALCULATOR_SCREEN_TEXT_KEY, zero)
+        } else {
+            memory = Memory()
+        }
+    }
+
+    companion object {
+        private const val MEMORY_KEY = "memory_key"
+        private const val CALCULATOR_SCREEN_TEXT_KEY = "calculator_screen_text_key"
     }
 
     fun onClickAnyButton(view: View) {
         val buttonText = (view as Button).text.toString()
 
         when (view) {
-            in digitalButtons -> {
-                if (actionButtonSign == '=' && digitalCollector == "0.") {
-                    clearCalculator()
-                } else if (actionButtonSign == '=') {
-                    clearCalculator()
+            in numberButtons -> {
+                if (memory.getDigitalMemory() == memory.getCalculatorScreenText()
+                    && memory.getDigitalCollector() != zeroDot
+                ) {
+                    memory.setDigitalCollector(empty)
                 }
-                digitalCollector += buttonText
-                calculatorScreenText.text = digitalCollector
+                memory.setDigitalCollector(memory.getDigitalCollector() + buttonText)
+                memory.setCalculatorScreenText(memory.getDigitalCollector())
+                calculatorScreenText.text = memory.getCalculatorScreenText()
             }
 
-            in actionButtons -> {
-                digitalMemory = digitalCollector
-                digitalCollector = ""
-                actionButtonSign = buttonText.single()
-                decimalClicked = false
+            in operationButtons -> {
+                if (memory.getDigitalMemory() != memory.getCalculatorScreenText()) {
+                    memory.setDigitalMemory(memory.getDigitalCollector())
+                }
+                memory.setDigitalCollector(empty)
+                memory.setActionButtonSign(buttonText.single())
+                memory.setDecimalClicked(false)
             }
 
             buttonDot -> {
-                if (!decimalClicked) {
-                    if (actionButtonSign == '=') {
-                        clearCalculator()
-                    }
-                    if (digitalCollector.isEmpty()) {
-                        digitalCollector = "0."
+                if (!memory.getDecimalClicked()) {
+                    if (memory.getCalculatorScreenText() == zero
+                        || memory.getDigitalCollector() == empty
+                        || memory.getDigitalMemory() == memory.getCalculatorScreenText()
+                    ) {
+                        memory.setDigitalCollector(zeroDot)
                     } else {
-                        digitalCollector += "."
+                        memory.setDigitalCollector(memory.getDigitalCollector() + buttonText)
                     }
-                    calculatorScreenText.text = digitalCollector
-                    decimalClicked = true
+                    memory.setCalculatorScreenText(memory.getDigitalCollector())
+                    calculatorScreenText.text = memory.getDigitalCollector()
+                    memory.setDecimalClicked(true)
                 }
             }
 
             buttonEquals -> {
-                val result = calculateResult()
-                calculatorScreenText.text = result
-                digitalCollector = result
-                actionButtonSign = '='
-                decimalClicked = false
+                memory.setDigitalMemory(Operations.calculateResult(memory, applicationContext))
+                memory.setCalculatorScreenText(memory.getDigitalMemory())
+                calculatorScreenText.text = memory.getCalculatorScreenText()
+                memory.setDecimalClicked(false)
             }
 
             buttonClear -> {
-                clearCalculator()
+                Operations.clearCalculator(memory)
+                calculatorScreenText.text = zero
             }
         }
-    }
-
-    private fun clearCalculator() {
-        digitalMemory = ""
-        digitalCollector = ""
-        calculatorScreenText.text = "0"
-        actionButtonSign = ' '
-        decimalClicked = false
-    }
-
-    private fun calculateResult(): String {
-        val operand1 = digitalMemory.toDouble()
-        val operand2 = digitalCollector.toDouble()
-        val result: Double = when (actionButtonSign) {
-            '+' -> operand1 + operand2
-            '-' -> operand1 - operand2
-            '×' -> operand1 * operand2
-            '÷' -> if (operand2 != 0.0) operand1 / operand2
-            else {
-                Toast.makeText(
-                    applicationContext,
-                    "Не пытайтесь делить на ноль.",
-                    Toast.LENGTH_SHORT
-                ).show()
-                0.0
-            }
-
-            else -> 0.0
-        }
-        return if (isInteger(result)) {
-            result.toInt().toString()
-        } else {
-            String.format("%.2f", result)
-        }
-    }
-
-    private fun isInteger(number: Double): Boolean {
-        return number % 1 == 0.0
     }
 
     fun onClickSwitcher(view: View) {
@@ -157,14 +136,14 @@ class MainActivity : AppCompatActivity() {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             Toast.makeText(
                 applicationContext,
-                "Ночной режим Активирован!",
+                "Night theme activated!",
                 Toast.LENGTH_SHORT
             ).show()
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             Toast.makeText(
                 applicationContext,
-                "Ночной режим Деактивирован!",
+                "Night theme deactivated!",
                 Toast.LENGTH_SHORT
             ).show()
         }
@@ -175,9 +154,27 @@ class MainActivity : AppCompatActivity() {
         if (textViewValueCopyByTap.isNotEmpty()) {
             Toast.makeText(
                 applicationContext,
-                "В память скопировано значение: $textViewValueCopyByTap",
+                "Value copied into memory: $textViewValueCopyByTap",
                 Toast.LENGTH_SHORT
             ).show()
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        outState.putParcelable(MEMORY_KEY, memory)
+        outState.putString(CALCULATOR_SCREEN_TEXT_KEY, calculatorScreenText.text.toString())
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        memory = savedInstanceState.getParcelable(MEMORY_KEY) ?: Memory()
+        memory.setCalculatorScreenText(
+            savedInstanceState.getString(
+                CALCULATOR_SCREEN_TEXT_KEY,
+                memory.getCalculatorScreenText()
+            )
+        )
     }
 }
