@@ -8,13 +8,6 @@
     tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/screenToButtonsGuideLine"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="@dimen/constraintGuideLine_top_land" />
-
-    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/content_start"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -28,52 +21,49 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="@dimen/constraintGuideLine_start_and_end_land" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/equals_Button_guideLine"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="80dp" />
-
     <TextView
         android:id="@+id/calculatorScreenText"
-        style="@style/Widget.Material3.AutoCompleteTextView.FilledBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/screen_to_buttons_land"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/screen_to_guideLine_margin_land"
         android:clickable="true"
-        android:ems="8"
         android:gravity="end"
         android:onClick="onClickTextView"
         android:text="@string/screenText"
+        android:textColor="@color/screenTextColor"
         android:textSize="@dimen/screen_text_size_land"
-        app:layout_constraintBottom_toTopOf="@id/screenToButtonsGuideLine"
+        app:layout_constraintBottom_toTopOf="@id/guidelineTopLand"
         app:layout_constraintEnd_toStartOf="@+id/content_end"
-        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintStart_toStartOf="@+id/content_start"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button1"
         style="@style/DigitalButtonStyle.ButtonStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/button_width_land"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/button_to_next_button"
+        android:layout_marginTop="@dimen/button_to_top_guideLine_land"
+        android:layout_marginEnd="@dimen/button_to_next_button_land"
+        android:layout_marginBottom="@dimen/button_to_bottom_land"
         android:onClick="onClickAnyButton"
         android:text="@string/button1text"
         android:textSize="@dimen/button_text_size_land"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/button4"
         app:layout_constraintEnd_toStartOf="@id/button2"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="@id/content_start"
-        app:layout_constraintTop_toBottomOf="@id/screenToButtonsGuideLine"
+        app:layout_constraintTop_toBottomOf="@id/guidelineTopLand"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <Button
         android:id="@+id/button2"
         style="@style/DigitalButtonStyle.ButtonStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/button_width_land"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/button_to_next_button"
+        android:layout_marginTop="@dimen/button_to_top_guideLine_land"
+        android:layout_marginEnd="@dimen/button_to_next_button_land"
+        android:layout_marginBottom="@dimen/button_to_bottom_land"
         android:onClick="onClickAnyButton"
         android:text="@string/button2text"
         android:textSize="@dimen/button_text_size_land"
@@ -81,15 +71,17 @@
         app:layout_constraintBottom_toTopOf="@id/button5"
         app:layout_constraintEnd_toStartOf="@id/button3"
         app:layout_constraintStart_toEndOf="@id/button1"
-        app:layout_constraintTop_toBottomOf="@id/screenToButtonsGuideLine"
+        app:layout_constraintTop_toBottomOf="@id/guidelineTopLand"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <Button
         android:id="@+id/button3"
         style="@style/DigitalButtonStyle.ButtonStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/button_width_land"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/button_to_next_button"
+        android:layout_marginTop="@dimen/button_to_top_guideLine_land"
+        android:layout_marginEnd="@dimen/button_to_signs_land"
+        android:layout_marginBottom="@dimen/button_to_bottom_land"
         android:onClick="onClickAnyButton"
         android:text="@string/button3text"
         android:textSize="@dimen/button_text_size_land"
@@ -97,14 +89,15 @@
         app:layout_constraintBottom_toTopOf="@id/button6"
         app:layout_constraintEnd_toStartOf="@id/buttonDivision"
         app:layout_constraintStart_toEndOf="@id/button2"
-        app:layout_constraintTop_toBottomOf="@id/screenToButtonsGuideLine"
+        app:layout_constraintTop_toBottomOf="@id/guidelineTopLand"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <Button
         android:id="@+id/buttonDivision"
         style="@style/ActionsButtonsStyle.ButtonStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/button_width_land"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/button_to_top_guideLine_land"
         android:layout_marginBottom="@dimen/button_to_bottom_land"
         android:onClick="onClickAnyButton"
         android:text="@string/buttonDivisionText"
@@ -113,14 +106,15 @@
         app:layout_constraintBottom_toTopOf="@id/buttonMulti"
         app:layout_constraintEnd_toStartOf="@id/content_end"
         app:layout_constraintStart_toEndOf="@id/button3"
-        app:layout_constraintTop_toBottomOf="@id/screenToButtonsGuideLine"
+        app:layout_constraintTop_toBottomOf="@id/guidelineTopLand"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <Button
         android:id="@+id/button4"
         style="@style/DigitalButtonStyle.ButtonStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/button_width_land"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/button_to_next_button_land"
         android:layout_marginBottom="@dimen/button_to_bottom_land"
         android:onClick="onClickAnyButton"
         android:text="@string/button4text"
@@ -128,14 +122,16 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/button7"
         app:layout_constraintEnd_toStartOf="@id/button5"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="@id/content_start"
         app:layout_constraintTop_toBottomOf="@id/button1" />
 
     <Button
         android:id="@+id/button5"
         style="@style/DigitalButtonStyle.ButtonStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/button_width_land"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/button_to_next_button_land"
         android:layout_marginBottom="@dimen/button_to_bottom_land"
         android:onClick="onClickAnyButton"
         android:text="@string/button5text"
@@ -149,8 +145,9 @@
     <Button
         android:id="@+id/button6"
         style="@style/DigitalButtonStyle.ButtonStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/button_width_land"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/button_to_signs_land"
         android:layout_marginBottom="@dimen/button_to_bottom_land"
         android:onClick="onClickAnyButton"
         android:text="@string/button6text"
@@ -164,7 +161,7 @@
     <Button
         android:id="@+id/buttonMulti"
         style="@style/ActionsButtonsStyle.ButtonStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/button_width_land"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/button_to_bottom_land"
         android:onClick="onClickAnyButton"
@@ -179,8 +176,9 @@
     <Button
         android:id="@+id/button7"
         style="@style/DigitalButtonStyle.ButtonStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/button_width_land"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/button_to_next_button_land"
         android:layout_marginBottom="@dimen/button_to_bottom_land"
         android:onClick="onClickAnyButton"
         android:text="@string/button7text"
@@ -188,14 +186,16 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/buttonClear"
         app:layout_constraintEnd_toStartOf="@id/button8"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="@id/content_start"
         app:layout_constraintTop_toBottomOf="@id/button4" />
 
     <Button
         android:id="@+id/button8"
         style="@style/DigitalButtonStyle.ButtonStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/button_width_land"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/button_to_next_button_land"
         android:layout_marginBottom="@dimen/button_to_bottom_land"
         android:onClick="onClickAnyButton"
         android:text="@string/button8text"
@@ -209,8 +209,9 @@
     <Button
         android:id="@+id/button9"
         style="@style/DigitalButtonStyle.ButtonStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/button_width_land"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/button_to_signs_land"
         android:layout_marginBottom="@dimen/button_to_bottom_land"
         android:onClick="onClickAnyButton"
         android:text="@string/button9text"
@@ -224,7 +225,7 @@
     <Button
         android:id="@+id/buttonPlus"
         style="@style/ActionsButtonsStyle.ButtonStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/button_width_land"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/button_to_bottom_land"
         android:onClick="onClickAnyButton"
@@ -239,27 +240,32 @@
     <Button
         android:id="@+id/buttonClear"
         style="@style/cAndDotButtonStyle.ButtonStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/button_width_land"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/button_to_next_button_land"
+        android:layout_marginBottom="@dimen/buttom_to_guideLine_land"
         android:onClick="onClickAnyButton"
         android:text="@string/buttonClearText"
         android:textSize="@dimen/button_text_size_land"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/equals_Button_guideLine"
+        app:layout_constraintBottom_toTopOf="@id/guidelineBottomLand"
         app:layout_constraintEnd_toStartOf="@id/button0"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="@id/content_start"
         app:layout_constraintTop_toBottomOf="@id/button7" />
 
     <Button
         android:id="@+id/button0"
         style="@style/DigitalButtonStyle.ButtonStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/button_width_land"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/button_to_next_button_land"
+        android:layout_marginBottom="@dimen/buttom_to_guideLine_land"
         android:onClick="onClickAnyButton"
         android:text="@string/button0text"
         android:textSize="@dimen/button_text_size_land"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/equals_Button_guideLine"
+        app:layout_constraintBottom_toTopOf="@id/guidelineBottomLand"
         app:layout_constraintEnd_toStartOf="@id/buttonDot"
         app:layout_constraintStart_toEndOf="@id/buttonClear"
         app:layout_constraintTop_toBottomOf="@id/button8" />
@@ -267,13 +273,15 @@
     <Button
         android:id="@+id/buttonDot"
         style="@style/cAndDotButtonStyle.ButtonStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/button_width_land"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/button_to_signs_land"
+        android:layout_marginBottom="@dimen/buttom_to_guideLine_land"
         android:onClick="onClickAnyButton"
         android:text="@string/buttonDotText"
         android:textSize="@dimen/button_text_size_land"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/equals_Button_guideLine"
+        app:layout_constraintBottom_toTopOf="@id/guidelineBottomLand"
         app:layout_constraintEnd_toStartOf="@id/buttonMinus"
         app:layout_constraintStart_toEndOf="@id/button0"
         app:layout_constraintTop_toBottomOf="@id/button9" />
@@ -281,13 +289,14 @@
     <Button
         android:id="@+id/buttonMinus"
         style="@style/ActionsButtonsStyle.ButtonStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/button_width_land"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/buttom_to_guideLine_land"
         android:onClick="onClickAnyButton"
         android:text="@string/buttonMinusText"
         android:textSize="@dimen/button_text_size_land"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/equals_Button_guideLine"
+        app:layout_constraintBottom_toTopOf="@id/guidelineBottomLand"
         app:layout_constraintEnd_toStartOf="@id/content_end"
         app:layout_constraintStart_toEndOf="@id/buttonDot"
         app:layout_constraintTop_toBottomOf="@id/buttonPlus" />
@@ -295,32 +304,54 @@
     <Button
         android:id="@+id/buttonEquals"
         style="@style/EqualsButtonStyle.ButtonStyle"
-        android:layout_width="@dimen/button_equals_size"
+        android:layout_width="380dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/equals_to_top_land"
-        android:layout_marginBottom="@dimen/equals_to_bottom_land"
+        android:layout_marginTop="@dimen/equals_to_top_guideLine_land"
         android:onClick="onClickAnyButton"
         android:text="@string/buttonEqualsText"
         android:textSize="@dimen/button_text_size_land"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/content_end"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="@id/content_start"
-        app:layout_constraintTop_toBottomOf="@id/equals_Button_guideLine"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintEnd_toEndOf="@id/buttonDot"
+        app:layout_constraintStart_toStartOf="@+id/buttonClear"
+        app:layout_constraintTop_toBottomOf="@id/guidelineBottomLand" />
 
     <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/darkModeSwitch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/button_to_next_button_land"
         android:onClick="onClickSwitcher"
         android:text="@string/switchText"
         android:textSize="@dimen/switchTextSize"
+        app:layout_constraintBottom_toBottomOf="@id/buttonEquals"
+        app:layout_constraintEnd_toEndOf="@id/buttonMinus"
+        app:layout_constraintStart_toStartOf="@id/buttonMinus"
+        app:layout_constraintTop_toBottomOf="@id/guidelineBottomLand" />
+
+    <androidx.constraintlayout.widget.Group
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="buttonClear,button0,buttonDot,buttonMinus" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineBottomLand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/guideLine_bottom_land_margin"
+        android:layout_marginBottom="@dimen/guideLine_bottom_land_margin"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/content_end"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/content_start"
-        app:layout_constraintTop_toTopOf="@+id/equals_Button_guideLine" />
+        app:layout_constraintGuide_end="@dimen/constraintGuideLine_bottom_land"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineTopLand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="110dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="@dimen/constraintGuideLineHorizontal"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

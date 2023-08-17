@@ -21,7 +21,4 @@
         <item name="android:textColor">@color/buttonTextColor</item>
     </style>
 
-    <style name="screenTextColor" parent="Widget.AppCompat.Button">
-        <item name="android:textColor">@color/screenTextColor</item>
-    </style>
 </resources>

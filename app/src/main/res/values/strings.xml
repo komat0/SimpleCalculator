@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">SimpleCalculator</string>
+    <string name="app_name">ProninCalculator</string>
     <string name="button1text">1</string>
     <string name="button2text">2</string>
     <string name="button3text">3</string>
@@ -19,5 +19,5 @@
     <string name="buttonClearText">C</string>
     <string name="buttonDotText">.</string>
     <string name="screenText">0</string>
-    <string name="switchText">DarkMode</string>
+    <string name="switchText">Dark Theme</string>
 </resources>
