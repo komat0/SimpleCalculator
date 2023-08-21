@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ProninCalculator</string>
+    <string name="app_name">Pronin Calculator</string>
     <string name="button1text">1</string>
     <string name="button2text">2</string>
     <string name="button3text">3</string>

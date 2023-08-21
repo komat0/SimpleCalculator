@@ -1,7 +1,10 @@
 package com.example.simplecalculator
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 
 class Operations {
     companion object {
@@ -60,6 +63,12 @@ class Operations {
             } else {
                 String.format("%.2f", result)
             }
+        }
+
+        fun copyToClipboard(context: Context, text: String) {
+            val clipboard = context.getSystemService(AppCompatActivity.CLIPBOARD_SERVICE) as ClipboardManager
+            val clip = ClipData.newPlainText("Calculator Result", text)
+            clipboard.setPrimaryClip(clip)
         }
     }
 }

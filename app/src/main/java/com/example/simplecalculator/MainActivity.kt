@@ -152,6 +152,7 @@ class MainActivity : AppCompatActivity() {
     fun onClickTextView(view: View) {
         textViewValueCopyByTap = calculatorScreenText.text.toString()
         if (textViewValueCopyByTap.isNotEmpty()) {
+            Operations.copyToClipboard(applicationContext, textViewValueCopyByTap)
             Toast.makeText(
                 applicationContext,
                 "Value copied into memory: $textViewValueCopyByTap",

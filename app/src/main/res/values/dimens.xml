@@ -3,14 +3,12 @@
     <dimen name="button_equals_size">300dp</dimen>
     <dimen name="button_equals_to_bottom">20dp</dimen>
     <dimen name="button_to_next_button">6dp</dimen>
-    <dimen name="screen_to_top">120dp</dimen>
     <dimen name="screen_text_size">90sp</dimen>
     <dimen name="button_text_size">40sp</dimen>
     <dimen name="constraintGuideLineVertical">10dp</dimen>
     <dimen name="constraintGuideLineHorizontal">100dp</dimen>
     <dimen name="switchTextSize">19sp</dimen>
-
-    <dimen name="button_to_next_button_land">10dp</dimen>
+    <dimen name="button_to_next_button_land">5sp</dimen>
     <dimen name="button_to_bottom_land">3dp</dimen>
     <dimen name="button_to_top_guideLine_land">15dp</dimen>
     <dimen name="equals_to_top_guideLine_land">5dp</dimen>
