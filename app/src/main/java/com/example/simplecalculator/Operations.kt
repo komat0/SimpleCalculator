@@ -20,7 +20,7 @@ class Operations {
             checkDivisionByZero(operand2, context)
 
             val result = operand1 / operand2
-            return formatResult(result)
+            return result.toString()
         }
 
         fun calculateResult(memory: Memory, context: Context): String {
@@ -30,18 +30,18 @@ class Operations {
                 memory.getDigitalCollector().toDouble() else 0.0
 
             return when (memory.getActionButtonSign()) {
-                '+' -> formatResult(operand1 + operand2)
-                '-' -> formatResult(operand1 - operand2)
-                '×' -> formatResult(operand1 * operand2)
+                '+' -> (operand1 + operand2).toString()
+                '-' -> (operand1 - operand2).toString()
+                '×' -> (operand1 * operand2).toString()
                 '÷' -> divide(operand1, operand2, context)
 
                 else -> "0"
             }
         }
 
-        fun isInteger(number: Double): Boolean {
-            return number % 1 == 0.0
-        }
+//        fun isInteger(number: Double): Boolean {
+//            return number % 1 == 0.0
+//        }
 
         fun zeroToaster(context: Context) {
             Toast.makeText(
@@ -57,13 +57,13 @@ class Operations {
             }
         }
 
-        fun formatResult(result: Double): String {
-            return if (isInteger(result)) {
-                result.toInt().toString()
-            } else {
-                String.format("%.2f", result)
-            }
-        }
+//        fun formatResult(result: Double): String {
+//            return if (isInteger(result)) {
+//                result.toInt().toString()
+//            } else {
+//                String.format("%.2f", result)
+//            }
+//        }
 
         fun copyToClipboard(context: Context, text: String) {
             val clipboard = context.getSystemService(AppCompatActivity.CLIPBOARD_SERVICE) as ClipboardManager
