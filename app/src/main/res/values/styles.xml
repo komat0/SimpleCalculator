@@ -21,4 +21,9 @@
         <item name="android:textColor">@color/buttonTextColor</item>
     </style>
 
+    <style name="delButtonStyle.ButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@color/delButton</item>
+        <item name="android:textColor">@color/buttonTextColor</item>
+    </style>
+
 </resources>

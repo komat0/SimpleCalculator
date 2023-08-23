@@ -11,19 +11,19 @@ import com.google.android.material.switchmaterial.SwitchMaterial
 
 class MainActivity : AppCompatActivity() {
     private val zero: String = "0"
-    private val zeroDot: String = "0."
     private val empty: String = ""
     private lateinit var memory: Memory
-    private lateinit var calculatorScreenText: TextView
+    private lateinit var screenText: TextView
     private lateinit var operationButtons: List<Button>
-    private lateinit var numberButtons: List<Button>
+    private lateinit var digitButtons: List<Button>
     private lateinit var buttonDivision: Button
     private lateinit var buttonMulti: Button
     private lateinit var buttonPlus: Button
     private lateinit var buttonMinus: Button
     private lateinit var buttonDot: Button
     private lateinit var buttonEquals: Button
-    private lateinit var buttonClear: Button
+    private lateinit var buttonDel: Button
+    private lateinit var buttonClean: Button
     private lateinit var darkModeSwitcher: SwitchMaterial
     private var textViewValueCopyByTap = empty
 
@@ -38,7 +38,8 @@ class MainActivity : AppCompatActivity() {
         buttonMinus = findViewById(R.id.buttonMinus)
         buttonDot = findViewById(R.id.buttonDot)
         buttonEquals = findViewById(R.id.buttonEquals)
-        buttonClear = findViewById(R.id.buttonClear)
+        buttonDel = findViewById(R.id.buttonDel)
+        buttonClean = findViewById(R.id.buttonClear)
 
         val button0: Button = findViewById(R.id.button0)
         val button1: Button = findViewById(R.id.button1)
@@ -51,11 +52,11 @@ class MainActivity : AppCompatActivity() {
         val button8: Button = findViewById(R.id.button8)
         val button9: Button = findViewById(R.id.button9)
 
-        calculatorScreenText = findViewById(R.id.calculatorScreenText)
+        screenText = findViewById(R.id.calculatorScreenText)
 
         darkModeSwitcher = findViewById(R.id.darkModeSwitch)
 
-        numberButtons = listOf(
+        digitButtons = listOf(
             button0, button1, button2, button3, button4,
             button5, button6, button7, button8, button9
         )
@@ -65,7 +66,7 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState != null) {
             memory = savedInstanceState.getParcelable(MEMORY_KEY) ?: Memory()
-            calculatorScreenText.text =
+            screenText.text =
                 savedInstanceState.getString(CALCULATOR_SCREEN_TEXT_KEY, zero)
         } else {
             memory = Memory()
@@ -81,52 +82,34 @@ class MainActivity : AppCompatActivity() {
         val buttonText = (view as Button).text.toString()
 
         when (view) {
-            in numberButtons -> {
-                if (memory.getDigitalMemory() == memory.getCalculatorScreenText()
-                    && memory.getDigitalCollector() != zeroDot
-                ) {
-                    memory.setDigitalCollector(empty)
-                }
-                memory.setDigitalCollector(memory.getDigitalCollector() + buttonText)
-                memory.setCalculatorScreenText(memory.getDigitalCollector())
-                calculatorScreenText.text = memory.getCalculatorScreenText()
+            in digitButtons -> {
+                Operations.digitButtonClick(memory, buttonText)
+                screenText.text = memory.getScreenText()
             }
 
             in operationButtons -> {
-                if (memory.getDigitalMemory() != memory.getCalculatorScreenText()) {
-                    memory.setDigitalMemory(memory.getDigitalCollector())
-                }
-                memory.setDigitalCollector(empty)
-                memory.setActionButtonSign(buttonText.single())
-                memory.setDecimalClicked(false)
+                Operations.operationButtonClick(memory, buttonText)
+                screenText.text = memory.getScreenText()
             }
 
             buttonDot -> {
-                if (!memory.getDecimalClicked()) {
-                    if (memory.getCalculatorScreenText() == zero
-                        || memory.getDigitalCollector() == empty
-                        || memory.getDigitalMemory() == memory.getCalculatorScreenText()
-                    ) {
-                        memory.setDigitalCollector(zeroDot)
-                    } else {
-                        memory.setDigitalCollector(memory.getDigitalCollector() + buttonText)
-                    }
-                    memory.setCalculatorScreenText(memory.getDigitalCollector())
-                    calculatorScreenText.text = memory.getDigitalCollector()
-                    memory.setDecimalClicked(true)
-                }
+                Operations.dotButtonClick(memory, buttonText)
+                screenText.text = memory.getCollector()
             }
 
             buttonEquals -> {
-                memory.setDigitalMemory(Operations.calculateResult(memory, applicationContext))
-                memory.setCalculatorScreenText(memory.getDigitalMemory())
-                calculatorScreenText.text = memory.getCalculatorScreenText()
-                memory.setDecimalClicked(false)
+                Operations.equalsButtonClick(memory)
+                screenText.text = memory.getScreenText()
             }
 
-            buttonClear -> {
-                Operations.clearCalculator(memory)
-                calculatorScreenText.text = zero
+            buttonClean -> {
+                Operations.cleanCalculator(memory)
+                screenText.text = zero
+            }
+
+            buttonDel -> {
+                Operations.deleteButtonClick(memory)
+                screenText.text = memory.getScreenText()
             }
         }
     }
@@ -136,21 +119,21 @@ class MainActivity : AppCompatActivity() {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             Toast.makeText(
                 applicationContext,
-                "Night theme activated!",
+                "Dark theme activated!",
                 Toast.LENGTH_SHORT
             ).show()
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             Toast.makeText(
                 applicationContext,
-                "Night theme deactivated!",
+                "Dark theme deactivated!",
                 Toast.LENGTH_SHORT
             ).show()
         }
     }
 
     fun onClickTextView(view: View) {
-        textViewValueCopyByTap = calculatorScreenText.text.toString()
+        textViewValueCopyByTap = screenText.text.toString()
         if (textViewValueCopyByTap.isNotEmpty()) {
             Operations.copyToClipboard(applicationContext, textViewValueCopyByTap)
             Toast.makeText(
@@ -165,16 +148,16 @@ class MainActivity : AppCompatActivity() {
         super.onSaveInstanceState(outState)
 
         outState.putParcelable(MEMORY_KEY, memory)
-        outState.putString(CALCULATOR_SCREEN_TEXT_KEY, calculatorScreenText.text.toString())
+        outState.putString(CALCULATOR_SCREEN_TEXT_KEY, screenText.text.toString())
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         memory = savedInstanceState.getParcelable(MEMORY_KEY) ?: Memory()
-        memory.setCalculatorScreenText(
+        memory.setScreenText(
             savedInstanceState.getString(
                 CALCULATOR_SCREEN_TEXT_KEY,
-                memory.getCalculatorScreenText()
+                memory.getScreenText()
             )
         )
     }

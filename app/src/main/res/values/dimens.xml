@@ -8,7 +8,7 @@
     <dimen name="constraintGuideLineVertical">10dp</dimen>
     <dimen name="constraintGuideLineHorizontal">100dp</dimen>
     <dimen name="switchTextSize">19sp</dimen>
-    <dimen name="button_to_next_button_land">5sp</dimen>
+    <dimen name="button_to_next_button_land">5dp</dimen>
     <dimen name="button_to_bottom_land">3dp</dimen>
     <dimen name="button_to_top_guideLine_land">15dp</dimen>
     <dimen name="equals_to_top_guideLine_land">5dp</dimen>

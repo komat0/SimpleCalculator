@@ -6,4 +6,5 @@
     <color name="actionButtons">#5E86A5</color>
     <color name="equalsButton">#4B9F97</color>
     <color name="cAndDotButtons">#9F8842</color>
+    <color name="delButton">#CDC34D27</color>
 </resources>

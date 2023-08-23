@@ -7,40 +7,40 @@ class Memory() : Parcelable {
 
     private var digitalCollector: String = ""
     private var digitalMemory: String = ""
-    private var actionButtonSign: Char = ' '
+    private var operationSign: Char = ' '
     private var decimalClicked: Boolean = false
-    private var calculatorScreenText: String = ""
+    private var screenText: String = ""
 
     constructor(parcel: Parcel) : this() {
         digitalCollector = parcel.readString().toString()
         digitalMemory = parcel.readString().toString()
-        actionButtonSign = parcel.readInt().toChar()
+        operationSign = parcel.readInt().toChar()
         decimalClicked = parcel.readByte() != 0.toByte()
-        calculatorScreenText = parcel.readString().toString()
+        screenText = parcel.readString().toString()
     }
 
-    fun getDigitalCollector(): String {
+    fun getCollector(): String {
         return digitalCollector
     }
 
-    fun setDigitalCollector(value: String) {
+    fun setCollector(value: String) {
         digitalCollector = value
     }
 
-    fun getDigitalMemory(): String {
+    fun getMemory(): String {
         return digitalMemory
     }
 
-    fun setDigitalMemory(value: String) {
+    fun setMemory(value: String) {
         digitalMemory = value
     }
 
-    fun getActionButtonSign(): Char {
-        return actionButtonSign
+    fun getOperationSign(): Char {
+        return operationSign
     }
 
-    fun setActionButtonSign(value: Char) {
-        actionButtonSign = value
+    fun setOperationSign(value: Char) {
+        operationSign = value
     }
 
     fun getDecimalClicked(): Boolean {
@@ -51,20 +51,20 @@ class Memory() : Parcelable {
         decimalClicked = clicked
     }
 
-    fun getCalculatorScreenText(): String {
-        return calculatorScreenText
+    fun getScreenText(): String {
+        return screenText
     }
 
-    fun setCalculatorScreenText(value: String) {
-        calculatorScreenText = value
+    fun setScreenText(value: String) {
+        screenText = value
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(digitalCollector)
         parcel.writeString(digitalMemory)
-        parcel.writeInt(actionButtonSign.code)
+        parcel.writeInt(operationSign.code)
         parcel.writeByte(if (decimalClicked) 1 else 0)
-        parcel.writeString(calculatorScreenText)
+        parcel.writeString(screenText)
     }
 
     override fun describeContents(): Int {

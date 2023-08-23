@@ -26,10 +26,12 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="@dimen/screen_to_guideLine_margin_land"
+        android:maxLines="2"
         android:clickable="true"
         android:gravity="end"
         android:onClick="onClickTextView"
         android:text="@string/screenText"
+        android:autoSizeTextType="uniform"
         android:textColor="@color/screenTextColor"
         android:textSize="@dimen/screen_text_size_land"
         app:layout_constraintBottom_toTopOf="@id/guidelineTopLand"
@@ -304,7 +306,7 @@
     <Button
         android:id="@+id/buttonEquals"
         style="@style/EqualsButtonStyle.ButtonStyle"
-        android:layout_width="380dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/equals_to_top_guideLine_land"
         android:onClick="onClickAnyButton"
@@ -313,6 +315,23 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/buttonDot"
+        app:layout_constraintStart_toStartOf="@+id/button0"
+        app:layout_constraintTop_toBottomOf="@id/guidelineBottomLand" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonDel"
+        style="@style/delButtonStyle.ButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/equals_to_top_guideLine_land"
+        android:layout_marginEnd="@dimen/button_to_next_button_land"
+        android:onClick="onClickAnyButton"
+        android:text="@string/del"
+        android:textSize="@dimen/button_text_size_land"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/buttonClear"
+        app:layout_constraintEnd_toStartOf="@+id/buttonEquals"
         app:layout_constraintStart_toStartOf="@+id/buttonClear"
         app:layout_constraintTop_toBottomOf="@id/guidelineBottomLand" />
 
@@ -320,7 +339,6 @@
         android:id="@+id/darkModeSwitch"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="@dimen/button_to_next_button_land"
         android:onClick="onClickSwitcher"
         android:text="@string/switchText"
         android:textSize="@dimen/switchTextSize"

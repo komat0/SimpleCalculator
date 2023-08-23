@@ -36,9 +36,11 @@
         android:clickable="true"
         android:gravity="end"
         android:onClick="onClickTextView"
+        android:autoSizeTextType="uniform"
+        android:maxLines="3"
         android:text="@string/screenText"
-        android:textSize="@dimen/screen_text_size"
         android:textColor="@color/screenTextColor"
+        android:textSize="@dimen/screen_text_size"
         app:layout_constraintBottom_toTopOf="@id/screenBarrier"
         app:layout_constraintEnd_toStartOf="@+id/content_end"
         app:layout_constraintHorizontal_bias="0.5"
@@ -287,17 +289,18 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonEquals"
         style="@style/EqualsButtonStyle.ButtonStyle"
-        android:layout_width="@dimen/button_equals_size"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/button_to_next_button"
         android:layout_marginBottom="@dimen/button_equals_to_bottom"
         android:onClick="onClickAnyButton"
         android:text="@string/buttonEqualsText"
         android:textSize="@dimen/button_text_size"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/content_end"
-        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintEnd_toEndOf="@+id/buttonMinus"
+        app:layout_constraintEnd_toStartOf="@id/content_end"
+        app:layout_constraintStart_toEndOf="@id/buttonDel"
+        app:layout_constraintStart_toStartOf="@+id/button0"
         app:layout_constraintTop_toBottomOf="@id/equals_Button_guideLine" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -329,6 +332,23 @@
         app:layout_constraintStart_toEndOf="@id/button0"
         app:layout_constraintTop_toBottomOf="@id/button9" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonDel"
+        style="@style/delButtonStyle.ButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/button_to_next_button"
+        android:layout_marginBottom="@dimen/button_equals_to_bottom"
+        android:onClick="onClickAnyButton"
+        android:text="@string/del"
+        android:textSize="@dimen/button_text_size"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/buttonClear"
+        app:layout_constraintEnd_toStartOf="@+id/buttonEquals"
+        app:layout_constraintStart_toStartOf="@+id/buttonClear"
+        app:layout_constraintTop_toBottomOf="@id/equals_Button_guideLine" />
+
     <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/darkModeSwitch"
         android:layout_width="wrap_content"
@@ -352,5 +372,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:constraint_referenced_ids="buttonDivision,buttonMulti,buttonPlus,buttonMinus" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

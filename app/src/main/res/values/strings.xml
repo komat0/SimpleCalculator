@@ -20,4 +20,5 @@
     <string name="buttonDotText">.</string>
     <string name="screenText">0</string>
     <string name="switchText">Dark Theme</string>
+    <string name="del">Del</string>
 </resources>
