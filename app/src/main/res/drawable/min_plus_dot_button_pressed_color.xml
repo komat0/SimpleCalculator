@@ -5,10 +5,10 @@
         <color android:color="@color/pressedColor" />
     </item>
     <item android:state_enabled="true">
-        <color android:color="@color/equalButtonColor" />
+        <color android:color="@color/minPlusDotButtonColor" />
     </item>
     <item android:state_enabled="false">
-        <color android:color="@color/equalButtonColor" />
+        <color android:color="@color/minPlusDotButtonColor" />
     </item>
 
 </selector>

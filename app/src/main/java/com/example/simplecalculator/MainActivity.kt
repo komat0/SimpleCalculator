@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var buttonEqual: Button
     private lateinit var buttonDel: Button
     private lateinit var buttonClean: Button
+    private lateinit var buttonMinPlus: Button
     private lateinit var darkThemeSwitcher: SwitchMaterial
     private var textViewValueCopyByTap = empty
 
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         buttonEqual = findViewById(R.id.buttonEqual)
         buttonDel = findViewById(R.id.buttonDel)
         buttonClean = findViewById(R.id.buttonClean)
+        buttonMinPlus = findViewById(R.id.buttonMinPlus)
 
         val button0: Button = findViewById(R.id.button0)
         val button1: Button = findViewById(R.id.button1)
@@ -116,11 +118,14 @@ class MainActivity : AppCompatActivity() {
             buttonDel -> {
                 Operations.deleteButtonClick(memory)
             }
+
+            buttonMinPlus -> {
+                Operations.addMinus(memory)
+            }
         }
+
         screenText.text = memory.getScreenText()
         smallScreenText.text = memory.getSmallScreenText()
-
-
     }
 
     fun onClickSwitcher(view: View) {

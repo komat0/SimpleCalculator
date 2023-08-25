@@ -6,6 +6,11 @@
         <item name="android:textColor">@color/buttonTextColor</item>
     </style>
 
+    <style name="MinPlusDotButtonStyle.ButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/min_plus_dot_button_pressed_color</item>
+        <item name="android:textColor">@color/minPlusDotTextColor</item>
+    </style>
+
     <style name="OperationsButtonsStyle.ButtonStyle" parent="Widget.AppCompat.Button">
         <item name="android:background">@drawable/operations_buttons_pressed_color</item>
         <item name="android:textColor">@color/buttonTextColor</item>
@@ -16,12 +21,12 @@
         <item name="android:textColor">@color/buttonTextColor</item>
     </style>
 
-    <style name="cAndDotButtonStyle.ButtonStyle" parent="Widget.AppCompat.Button">
-        <item name="android:background">@drawable/c_and_dot_buttons_pressed_color</item>
+    <style name="CleanButtonStyle.ButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/clean_buttons_pressed_color</item>
         <item name="android:textColor">@color/buttonTextColor</item>
     </style>
 
-    <style name="delButtonStyle.ButtonStyle" parent="Widget.AppCompat.Button">
+    <style name="DelButtonStyle.ButtonStyle" parent="Widget.AppCompat.Button">
         <item name="android:background">@drawable/del_button_pressed_color</item>
         <item name="android:textColor">@color/buttonTextColor</item>
     </style>

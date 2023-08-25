@@ -18,6 +18,7 @@
     <dimen name="button_width_land">120dp</dimen>
     <dimen name="buttom_to_guideLine_land">30dp</dimen>
     <dimen name="screen_text_size_land">70sp</dimen>
+    <dimen name="small_screen_text_size_land">5sp</dimen>
     <dimen name="button_text_size_land">35sp</dimen>
     <dimen name="screen_to_guideLine_margin_land">5dp</dimen>
     <dimen name="constraintGuideLine_start_and_end_land">50dp</dimen>

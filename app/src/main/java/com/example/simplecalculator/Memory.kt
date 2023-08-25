@@ -12,6 +12,7 @@ class Memory() : Parcelable {
     private var equalClicked: Boolean = false
     private var operationSignClicked: Boolean = false
     private var delClicked: Boolean = false
+    private var minusSignClicked: Boolean = false
     private var screenText: String = ""
     private var smallScreenText: String = ""
 
@@ -24,6 +25,7 @@ class Memory() : Parcelable {
         equalClicked = parcel.readByte() != 0.toByte()
         operationSignClicked = parcel.readByte() != 0.toByte()
         delClicked = parcel.readByte() != 0.toByte()
+        minusSignClicked = parcel.readByte() != 0.toByte()
         screenText = parcel.readString().toString()
         smallScreenText = parcel.readString().toString()
     }
@@ -80,6 +82,13 @@ class Memory() : Parcelable {
     fun setDelClicked(clicked: Boolean) {
         delClicked = clicked
     }
+    fun getMinusSignClicked(): Boolean {
+        return minusSignClicked
+    }
+
+    fun setMinusSignClicked(clicked: Boolean) {
+        minusSignClicked = clicked
+    }
 
     fun getScreenText(): String {
         return screenText
@@ -103,6 +112,8 @@ class Memory() : Parcelable {
         parcel.writeByte(if (decimalClicked) 1 else 0)
         parcel.writeByte(if (equalClicked) 1 else 0)
         parcel.writeByte(if (operationSignClicked) 1 else 0)
+        parcel.writeByte(if (minusSignClicked) 1 else 0)
+
         parcel.writeString(screenText)
         parcel.writeString(smallScreenText)
     }

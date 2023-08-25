@@ -22,4 +22,5 @@
     <string name="smallScreenText">0</string>
     <string name="switchText">Dark Theme</string>
     <string name="del">Del</string>
+    <string name="buttinMinPlus">-/+</string>
 </resources>

@@ -5,6 +5,9 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import java.math.RoundingMode
+import java.text.DecimalFormat
+import kotlin.system.measureTimeMillis
 
 class Operations {
 
@@ -35,53 +38,41 @@ class Operations {
         }
 
         fun operationButtonClick(memory: Memory, buttonText: String) {
-            // При любом нажатии на кнопки операции, меняем знак операции
-            memory.setOperationSign(buttonText.single())
             // Проверка если нет никаких данных, то просто поставить знак на малом экране
             if (memory.getScreenText() == zero || memory.getScreenText() == zeroDot) {
+                memory.setOperationSign(buttonText.single())
                 memory.setSmallScreenText(memory.getOperationSign().toString())
                 memory.setMemory(zero)
                 // Обратобка второго нажатия. Когда нет второго операнда (тоесть коллектор пустой). Просто обновляем знак на экране
-            } else if (memory.getMemory() == memory.getScreenText() && memory.getCollector()
-                    .isEmpty()
+            } else if (memory.getMemory().isNotEmpty() && memory.getCollector().isEmpty()
             ) {
+                memory.setOperationSign(buttonText.single())
                 memory.setSmallScreenText(memory.getMemory() + memory.getOperationSign())
-                // Если до этого не вводили никакое число и мемори пуст, добавить в него коллектор, а коллектор обнулить.
+                // Если до этого не вводили никакое число и мемори пуст (или ноль), добавить в него коллектор, а коллектор обнулить.
             } else if ((memory.getMemory().isEmpty() || memory.getMemory() == zero)
                 && memory.getCollector().isNotEmpty()
             ) {
+                memory.setOperationSign(buttonText.single())
                 memory.setMemory(memory.getCollector())
                 memory.setCollector(empty)
                 memory.setSmallScreenText(memory.getMemory() + memory.getOperationSign())
-                // При втором нажатии производит вычисления
+                // При втором нажатии производит вычисления если не было нажато =
             } else if (memory.getMemory().isNotEmpty() && memory.getCollector()
-                    .isNotEmpty()) {
-                val halfResult = memory.getMemory()
+                    .isNotEmpty() && !memory.getEqualClicked()
+            ) {
                 memory.setMemory(calculateResult(memory))
+                memory.setCollector(empty)
+                memory.setOperationSign(buttonText.single())
                 // Выводим результат на оба экрана
-                memory.setScreenText(memory.getMemory())
-                memory.setSmallScreenText(
-                    halfResult
-                            + memory.getOperationSign()
-                            + memory.getCollector()
-                            + "="
-                )
+                memory.setSmallScreenText(memory.getMemory() + memory.getOperationSign())
+                // Если после нажатия на равно нажать кнопку операций просто поменять знак.
+            } else if (memory.getMemory().isNotEmpty() && memory.getCollector()
+                    .isNotEmpty()
+            ) {
+                memory.setOperationSign(buttonText.single())
+                memory.setSmallScreenText(memory.getScreenText() + memory.getOperationSign())
+                memory.setCollector(empty)
             }
-
-//            // Если нажать повторно кнопку операции, просто менять знак
-//            if (memory.getOperationClicked()) {
-//                memory.setSmallScreenText(memory.getScreenText() + memory.getOperationSign())
-//
-//                // Если кнопка = не была нажата (то есть это первое нажатие), копировать число в мемори и чистить коллектор.
-//            } else if (!memory.getEqualClicked()) {
-//                memory.setMemory(memory.getCollector())
-//                memory.setCollector(empty)
-//                memory.setSmallScreenText(memory.getMemory() + memory.getOperationSign())
-//
-//                // Если была нажата кнопка =, то просто вывести на малом экране мемори и знак.
-//            } else if (memory.getEqualClicked()) {
-//                memory.setSmallScreenText(memory.getMemory() + memory.getOperationSign())
-//            }
             // Сбрасываем флаги точки и удаления
             memory.setDelClicked(false)
             memory.setDecimalClicked(false)
@@ -91,24 +82,29 @@ class Operations {
 
             // Выводим на экран мемори при любом нажатии на кнопку операции
             memory.setScreenText(memory.getMemory())
+            // убираем флаг нажатого минуса
+            memory.setMinusSignClicked(false)
         }
 
         fun equalButtonClick(memory: Memory) {
             // Проверка что есть оба операнда. Если нет, ничего не делать
             if (memory.getMemory().isNotEmpty() && memory.getCollector().isNotEmpty()) {
-                // Считаем вычисления и копируем результат в memory.
-                memory.setMemory(calculateResult(memory))
-                // Выводим результат на оба экрана
-                memory.setScreenText(memory.getMemory())
+                // Сначала выводим малый экран, так как после вычислений мемори изменится.
                 memory.setSmallScreenText(
                     memory.getMemory()
                             + memory.getOperationSign()
                             + memory.getCollector()
                             + "="
                 )
+                // Считаем вычисления и копируем результат в memory.
+                memory.setMemory(calculateResult(memory))
+                // Выводим результат на оба экрана
+                memory.setScreenText(memory.getMemory())
             }
-            // СБрасываем флаг точки, что бы можно было сразу набрать .0
+            // Сбрасываем флаг точки, что бы можно было сразу набрать .0
             memory.setDecimalClicked(false)
+                // убираем флаг нажатого минуса
+            memory.setMinusSignClicked(false)
             // Устанавливаем флаг нажатия на =
             memory.setEqualClicked(true)
         }
@@ -168,6 +164,8 @@ class Operations {
             memory.setEqualClicked(false)
             memory.setOperationClicked(false)
             memory.setSmallScreenText("")
+            memory.setMinusSignClicked(false)
+
         }
 
         private fun calculateResult(memory: Memory): String {
@@ -191,14 +189,10 @@ class Operations {
         }
 
         private fun formatResult(result: Double): String {
-            val formatted: String
-            return if (result % 1.0 == 0.0) {
-                formatted = String.format("%.0f", result)
-                formatted
-            } else {
-                formatted = String.format("%.5f", result)
-                formatted
-            }
+
+            val df = DecimalFormat("#.#####")
+            df.roundingMode = RoundingMode.UP
+            return df.format(result)
         }
 
         fun copyScreenToClipboard(context: Context, text: String) {
@@ -216,6 +210,22 @@ class Operations {
                 input.dropLast(1)
             } else {
                 input
+            }
+        }
+
+        fun addMinus(memory: Memory) {
+            // ПРоверяем что коллектор и экран совпадают, значит идет сбор числа и что - не был нажат
+            val charToReplace = '-'
+            val stringToReplace = memory.getCollector().replace(charToReplace.toString(), "")
+
+            if (memory.getCollector() == memory.getScreenText() && !memory.getMinusSignClicked() && memory.getCollector().isNotEmpty()) {
+                memory.setCollector("-" + memory.getCollector())
+                memory.setScreenText(memory.getCollector())
+                memory.setMinusSignClicked(true)
+            } else if (memory.getCollector() == memory.getScreenText() && memory.getMinusSignClicked()){
+                memory.setCollector(stringToReplace)
+                memory.setScreenText(memory.getCollector())
+                memory.setMinusSignClicked(false)
             }
         }
     }
