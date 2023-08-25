@@ -11,14 +11,15 @@
     <string name="button8text">8</string>
     <string name="button9text">9</string>
     <string name="button0text">0</string>
-    <string name="buttonEqualsText">=</string>
-    <string name="buttonDivisionText">÷</string>
-    <string name="buttonMultiText">×</string>
+    <string name="buttonEqualText">=</string>
+    <string name="buttonDivisionText">/</string>
+    <string name="buttonMultiText">*</string>
     <string name="buttonPlusText">+</string>
     <string name="buttonMinusText">-</string>
-    <string name="buttonClearText">C</string>
+    <string name="buttonCleanText">C</string>
     <string name="buttonDotText">.</string>
     <string name="screenText">0</string>
+    <string name="smallScreenText">0</string>
     <string name="switchText">Dark Theme</string>
     <string name="del">Del</string>
 </resources>

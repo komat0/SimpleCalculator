@@ -3,8 +3,9 @@
     <color name="buttonTextColor">#FFFFFFFF</color>
     <color name="screenTextColor">#000000</color>
     <color name="digitButtons">#9E8F8C8C</color>
-    <color name="actionButtons">#76A3C6</color>
-    <color name="equalsButton">#63D8CD</color>
+    <color name="operationButtons">#76A3C6</color>
+    <color name="equalButton">#63D8CD</color>
     <color name="cAndDotButtons">#F5D165</color>
     <color name="delButton">#B9FF7043</color>
+    <color name="pressed">#D8DD7FED</color>
 </resources>

@@ -2,27 +2,27 @@
 <resources>
 
     <style name="DigitalButtonStyle.ButtonStyle" parent="Widget.AppCompat.Button">
-        <item name="android:background">@color/digitButtons</item>
+        <item name="android:background">@drawable/digit_button_pressed_color</item>
         <item name="android:textColor">@color/buttonTextColor</item>
     </style>
 
-    <style name="ActionsButtonsStyle.ButtonStyle" parent="Widget.AppCompat.Button">
-        <item name="android:background">@color/actionButtons</item>
+    <style name="OperationsButtonsStyle.ButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/operations_buttons_pressed_color</item>
         <item name="android:textColor">@color/buttonTextColor</item>
     </style>
 
-    <style name="EqualsButtonStyle.ButtonStyle" parent="Widget.AppCompat.Button">
-        <item name="android:background">@color/equalsButton</item>
+    <style name="EqualButtonStyle.ButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/equal_button_pressed_color</item>
         <item name="android:textColor">@color/buttonTextColor</item>
     </style>
 
     <style name="cAndDotButtonStyle.ButtonStyle" parent="Widget.AppCompat.Button">
-        <item name="android:background">@color/cAndDotButtons</item>
+        <item name="android:background">@drawable/c_and_dot_buttons_pressed_color</item>
         <item name="android:textColor">@color/buttonTextColor</item>
     </style>
 
     <style name="delButtonStyle.ButtonStyle" parent="Widget.AppCompat.Button">
-        <item name="android:background">@color/delButton</item>
+        <item name="android:background">@drawable/del_button_pressed_color</item>
         <item name="android:textColor">@color/buttonTextColor</item>
     </style>
 

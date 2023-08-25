@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity() {
     private val empty: String = ""
     private lateinit var memory: Memory
     private lateinit var screenText: TextView
+    private lateinit var smallScreenText: TextView
     private lateinit var operationButtons: List<Button>
     private lateinit var digitButtons: List<Button>
     private lateinit var buttonDivision: Button
@@ -21,10 +22,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var buttonPlus: Button
     private lateinit var buttonMinus: Button
     private lateinit var buttonDot: Button
-    private lateinit var buttonEquals: Button
+    private lateinit var buttonEqual: Button
     private lateinit var buttonDel: Button
     private lateinit var buttonClean: Button
-    private lateinit var darkModeSwitcher: SwitchMaterial
+    private lateinit var darkThemeSwitcher: SwitchMaterial
     private var textViewValueCopyByTap = empty
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,9 +38,9 @@ class MainActivity : AppCompatActivity() {
         buttonPlus = findViewById(R.id.buttonPlus)
         buttonMinus = findViewById(R.id.buttonMinus)
         buttonDot = findViewById(R.id.buttonDot)
-        buttonEquals = findViewById(R.id.buttonEquals)
+        buttonEqual = findViewById(R.id.buttonEqual)
         buttonDel = findViewById(R.id.buttonDel)
-        buttonClean = findViewById(R.id.buttonClear)
+        buttonClean = findViewById(R.id.buttonClean)
 
         val button0: Button = findViewById(R.id.button0)
         val button1: Button = findViewById(R.id.button1)
@@ -53,8 +54,9 @@ class MainActivity : AppCompatActivity() {
         val button9: Button = findViewById(R.id.button9)
 
         screenText = findViewById(R.id.calculatorScreenText)
+        smallScreenText = findViewById(R.id.calculatorSmallScreenText)
 
-        darkModeSwitcher = findViewById(R.id.darkModeSwitch)
+        darkThemeSwitcher = findViewById(R.id.darkThemeSwitch)
 
         digitButtons = listOf(
             button0, button1, button2, button3, button4,
@@ -68,6 +70,8 @@ class MainActivity : AppCompatActivity() {
             memory = savedInstanceState.getParcelable(MEMORY_KEY) ?: Memory()
             screenText.text =
                 savedInstanceState.getString(CALCULATOR_SCREEN_TEXT_KEY, zero)
+            smallScreenText.text =
+                savedInstanceState.getString(CALCULATOR_SMALL_SCREEN_TEXT_KEY, zero)
         } else {
             memory = Memory()
         }
@@ -76,6 +80,7 @@ class MainActivity : AppCompatActivity() {
     companion object {
         private const val MEMORY_KEY = "memory_key"
         private const val CALCULATOR_SCREEN_TEXT_KEY = "calculator_screen_text_key"
+        private const val CALCULATOR_SMALL_SCREEN_TEXT_KEY = "calculator_small_screen_text_key"
     }
 
     fun onClickAnyButton(view: View) {
@@ -84,38 +89,42 @@ class MainActivity : AppCompatActivity() {
         when (view) {
             in digitButtons -> {
                 Operations.digitButtonClick(memory, buttonText)
-                screenText.text = memory.getScreenText()
             }
 
             in operationButtons -> {
                 Operations.operationButtonClick(memory, buttonText)
-                screenText.text = memory.getScreenText()
+                if (memory.getSmallScreenText().isNotEmpty()) {
+                    smallScreenText.visibility = View.VISIBLE
+                    smallScreenText.text = memory.getSmallScreenText()
+                } else {
+                    smallScreenText.visibility = View.INVISIBLE
+                }
             }
 
             buttonDot -> {
                 Operations.dotButtonClick(memory, buttonText)
-                screenText.text = memory.getCollector()
             }
 
-            buttonEquals -> {
-                Operations.equalsButtonClick(memory)
-                screenText.text = memory.getScreenText()
+            buttonEqual -> {
+                Operations.equalButtonClick(memory)
             }
 
             buttonClean -> {
-                Operations.cleanCalculator(memory)
-                screenText.text = zero
+                Operations.cleanButtonClick(memory)
             }
 
             buttonDel -> {
                 Operations.deleteButtonClick(memory)
-                screenText.text = memory.getScreenText()
             }
         }
+        screenText.text = memory.getScreenText()
+        smallScreenText.text = memory.getSmallScreenText()
+
+
     }
 
     fun onClickSwitcher(view: View) {
-        if (darkModeSwitcher.isChecked) {
+        if (darkThemeSwitcher.isChecked) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             Toast.makeText(
                 applicationContext,
@@ -133,9 +142,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onClickTextView(view: View) {
-        textViewValueCopyByTap = screenText.text.toString()
+        textViewValueCopyByTap = Operations.removeLastSymbolIfMatch(memory.getScreenText())
         if (textViewValueCopyByTap.isNotEmpty()) {
-            Operations.copyToClipboard(applicationContext, textViewValueCopyByTap)
+            Operations.copyScreenToClipboard(applicationContext, textViewValueCopyByTap)
             Toast.makeText(
                 applicationContext,
                 "Value copied into memory: $textViewValueCopyByTap",
@@ -149,6 +158,7 @@ class MainActivity : AppCompatActivity() {
 
         outState.putParcelable(MEMORY_KEY, memory)
         outState.putString(CALCULATOR_SCREEN_TEXT_KEY, screenText.text.toString())
+        outState.putString(CALCULATOR_SMALL_SCREEN_TEXT_KEY, smallScreenText.text.toString())
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -158,6 +168,12 @@ class MainActivity : AppCompatActivity() {
             savedInstanceState.getString(
                 CALCULATOR_SCREEN_TEXT_KEY,
                 memory.getScreenText()
+            )
+        )
+        memory.setSmallScreenText(
+            savedInstanceState.getString(
+                CALCULATOR_SMALL_SCREEN_TEXT_KEY,
+                memory.getSmallScreenText()
             )
         )
     }
