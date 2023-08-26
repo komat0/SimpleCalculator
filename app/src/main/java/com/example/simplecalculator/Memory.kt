@@ -10,7 +10,6 @@ class Memory() : Parcelable {
     private var operationSign: Char = ' '
     private var decimalClicked: Boolean = false
     private var equalClicked: Boolean = false
-    private var operationSignClicked: Boolean = false
     private var delClicked: Boolean = false
     private var minusSignClicked: Boolean = false
     private var screenText: String = ""
@@ -23,7 +22,6 @@ class Memory() : Parcelable {
         operationSign = parcel.readInt().toChar()
         decimalClicked = parcel.readByte() != 0.toByte()
         equalClicked = parcel.readByte() != 0.toByte()
-        operationSignClicked = parcel.readByte() != 0.toByte()
         delClicked = parcel.readByte() != 0.toByte()
         minusSignClicked = parcel.readByte() != 0.toByte()
         screenText = parcel.readString().toString()
@@ -61,6 +59,7 @@ class Memory() : Parcelable {
     fun setDecimalClicked(clicked: Boolean) {
         decimalClicked = clicked
     }
+
     fun getEqualClicked(): Boolean {
         return equalClicked
     }
@@ -68,13 +67,7 @@ class Memory() : Parcelable {
     fun setEqualClicked(clicked: Boolean) {
         equalClicked = clicked
     }
-    fun getOperationClicked(): Boolean {
-        return operationSignClicked
-    }
 
-    fun setOperationClicked(clicked: Boolean) {
-        operationSignClicked = clicked
-    }
     fun getDelClicked(): Boolean {
         return delClicked
     }
@@ -82,6 +75,7 @@ class Memory() : Parcelable {
     fun setDelClicked(clicked: Boolean) {
         delClicked = clicked
     }
+
     fun getMinusSignClicked(): Boolean {
         return minusSignClicked
     }
@@ -97,6 +91,7 @@ class Memory() : Parcelable {
     fun setScreenText(value: String) {
         screenText = value
     }
+
     fun getSmallScreenText(): String {
         return smallScreenText
     }
@@ -111,9 +106,7 @@ class Memory() : Parcelable {
         parcel.writeInt(operationSign.code)
         parcel.writeByte(if (decimalClicked) 1 else 0)
         parcel.writeByte(if (equalClicked) 1 else 0)
-        parcel.writeByte(if (operationSignClicked) 1 else 0)
         parcel.writeByte(if (minusSignClicked) 1 else 0)
-
         parcel.writeString(screenText)
         parcel.writeString(smallScreenText)
     }

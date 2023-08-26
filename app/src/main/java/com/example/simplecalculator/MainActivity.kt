@@ -74,6 +74,9 @@ class MainActivity : AppCompatActivity() {
                 savedInstanceState.getString(CALCULATOR_SCREEN_TEXT_KEY, zero)
             smallScreenText.text =
                 savedInstanceState.getString(CALCULATOR_SMALL_SCREEN_TEXT_KEY, zero)
+            smallScreenVisible = savedInstanceState.getBoolean(KEY_SMALL_SCREEN_VISIBILITY, true)
+            val smallScreenText = findViewById<TextView>(R.id.calculatorSmallScreenText)
+            smallScreenText.visibility = if (smallScreenVisible) View.VISIBLE else View.INVISIBLE
         } else {
             memory = Memory()
         }
@@ -83,6 +86,8 @@ class MainActivity : AppCompatActivity() {
         private const val MEMORY_KEY = "memory_key"
         private const val CALCULATOR_SCREEN_TEXT_KEY = "calculator_screen_text_key"
         private const val CALCULATOR_SMALL_SCREEN_TEXT_KEY = "calculator_small_screen_text_key"
+        private const val KEY_SMALL_SCREEN_VISIBILITY = "small_screen_visibility"
+        private var smallScreenVisible = true
     }
 
     fun onClickAnyButton(view: View) {
@@ -95,11 +100,13 @@ class MainActivity : AppCompatActivity() {
 
             in operationButtons -> {
                 Operations.operationButtonClick(memory, buttonText)
-                if (memory.getSmallScreenText().isNotEmpty()) {
+                if ((memory.getMemory().isEmpty() || memory.getMemory() == zero)
+                    && memory.getCollector().isEmpty()
+                ) {
+                    smallScreenText.visibility = View.INVISIBLE
+                } else {
                     smallScreenText.visibility = View.VISIBLE
                     smallScreenText.text = memory.getSmallScreenText()
-                } else {
-                    smallScreenText.visibility = View.INVISIBLE
                 }
             }
 
@@ -121,6 +128,7 @@ class MainActivity : AppCompatActivity() {
 
             buttonMinPlus -> {
                 Operations.addMinus(memory)
+                smallScreenText.visibility = View.VISIBLE
             }
         }
 
@@ -164,6 +172,7 @@ class MainActivity : AppCompatActivity() {
         outState.putParcelable(MEMORY_KEY, memory)
         outState.putString(CALCULATOR_SCREEN_TEXT_KEY, screenText.text.toString())
         outState.putString(CALCULATOR_SMALL_SCREEN_TEXT_KEY, smallScreenText.text.toString())
+        outState.putBoolean(KEY_SMALL_SCREEN_VISIBILITY, smallScreenVisible)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -181,5 +190,7 @@ class MainActivity : AppCompatActivity() {
                 memory.getSmallScreenText()
             )
         )
+        smallScreenText.text = savedInstanceState.getString(CALCULATOR_SMALL_SCREEN_TEXT_KEY, "")
+
     }
 }

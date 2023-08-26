@@ -21,13 +21,19 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="@dimen/constraintGuideLine_start_and_end_land" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/small_screenBetweenButtons"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/small_screenBetweenButtons_GuideLine_land" />
+
     <TextView
         android:id="@+id/calculatorSmallScreenText"
         style="@style/Widget.Material3.AutoCompleteTextView.FilledBox"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="@dimen/button_to_next_button"
-        android:autoSizeTextType="uniform"
         android:clickable="false"
         android:gravity="end"
         android:maxLines="6"
@@ -37,7 +43,7 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@id/guidelineBottomLand"
         app:layout_constraintEnd_toEndOf="@id/content_end"
-        app:layout_constraintStart_toEndOf="@id/buttonDivision"
+        app:layout_constraintStart_toEndOf="@id/small_screenBetweenButtons"
         app:layout_constraintTop_toBottomOf="@id/guidelineTopLand" />
 
     <TextView
@@ -125,7 +131,7 @@
         android:textSize="@dimen/button_text_size_land"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/buttonMulti"
-        app:layout_constraintEnd_toStartOf="@id/content_end"
+        app:layout_constraintEnd_toStartOf="@id/small_screenBetweenButtons"
         app:layout_constraintStart_toEndOf="@id/button3"
         app:layout_constraintTop_toBottomOf="@id/guidelineTopLand"
         app:layout_constraintVertical_chainStyle="packed" />
@@ -190,7 +196,7 @@
         android:textSize="@dimen/button_text_size_land"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/buttonPlus"
-        app:layout_constraintEnd_toStartOf="@id/content_end"
+        app:layout_constraintEnd_toStartOf="@id/small_screenBetweenButtons"
         app:layout_constraintStart_toEndOf="@id/button6"
         app:layout_constraintTop_toBottomOf="@id/buttonDivision" />
 
@@ -254,7 +260,7 @@
         android:textSize="@dimen/button_text_size_land"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/buttonMinus"
-        app:layout_constraintEnd_toStartOf="@id/content_end"
+        app:layout_constraintEnd_toStartOf="@id/small_screenBetweenButtons"
         app:layout_constraintStart_toEndOf="@id/button9"
         app:layout_constraintTop_toBottomOf="@id/buttonMulti" />
 
@@ -318,7 +324,7 @@
         android:textSize="@dimen/button_text_size_land"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/guidelineBottomLand"
-        app:layout_constraintEnd_toStartOf="@id/content_end"
+        app:layout_constraintEnd_toStartOf="@id/small_screenBetweenButtons"
         app:layout_constraintStart_toEndOf="@id/buttonDot"
         app:layout_constraintTop_toBottomOf="@id/buttonPlus" />
 
@@ -380,9 +386,9 @@
         android:onClick="onClickSwitcher"
         android:text="@string/switchText"
         android:textSize="@dimen/switchTextSize"
-        app:layout_constraintBottom_toBottomOf="@id/buttonEqual"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/content_end"
-        app:layout_constraintStart_toStartOf="@+id/calculatorSmallScreenText"
+        app:layout_constraintStart_toStartOf="@+id/small_screenBetweenButtons"
         app:layout_constraintTop_toBottomOf="@id/guidelineBottomLand" />
 
     <androidx.constraintlayout.widget.Group

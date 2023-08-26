@@ -3,7 +3,7 @@
     <dimen name="button_equal_size">300dp</dimen>
     <dimen name="button_equal_to_bottom">20dp</dimen>
     <dimen name="button_to_next_button">6dp</dimen>
-    <dimen name="screen_text_size">90sp</dimen>
+    <dimen name="screen_text_size">85sp</dimen>
     <dimen name="small_screen_text_size">20sp</dimen>
     <dimen name="button_text_size">40sp</dimen>
     <dimen name="constraint_GuideLineVertical">10dp</dimen>
@@ -15,14 +15,15 @@
     <dimen name="button_to_top_guideLine_land">15dp</dimen>
     <dimen name="equal_to_top_guideLine_land">5dp</dimen>
     <dimen name="button_to_signs_land">35dp</dimen>
-    <dimen name="button_width_land">120dp</dimen>
-    <dimen name="buttom_to_guideLine_land">30dp</dimen>
+    <dimen name="button_width_land">100dp</dimen>
     <dimen name="screen_text_size_land">70sp</dimen>
-    <dimen name="small_screen_text_size_land">5sp</dimen>
+    <dimen name="small_screen_text_size_land">20sp</dimen>
     <dimen name="button_text_size_land">35sp</dimen>
     <dimen name="screen_to_guideLine_margin_land">5dp</dimen>
-    <dimen name="constraintGuideLine_start_and_end_land">50dp</dimen>
+    <dimen name="constraintGuideLine_start_and_end_land">20dp</dimen>
     <dimen name="constraintGuideLine_bottom_land">60dp</dimen>
     <dimen name="constraintGuideLineHorizontal_land">100dp</dimen>
+    <dimen name="buttom_to_guideLine_land">30dp</dimen>
+    <dimen name="small_screenBetweenButtons_GuideLine_land">350dp</dimen>
     <dimen name="guideLine_bottom_land_margin">2dp</dimen>
 </resources>

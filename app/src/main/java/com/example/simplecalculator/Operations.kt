@@ -3,11 +3,9 @@ package com.example.simplecalculator
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import java.math.RoundingMode
 import java.text.DecimalFormat
-import kotlin.system.measureTimeMillis
 
 class Operations {
 
@@ -27,9 +25,25 @@ class Operations {
                 memory.setMemory(memory.getMemory() + buttonText)
                 memory.setScreenText(memory.getMemory())
             } else {
-                //ЭТО ДЛЯ ТОГО ЧТО БЫ ПРИ ОТОБРАЖЕНИИ НУЛЯ БЕЗ ТОЧКИ ОН НЕ ПИСАЛСЯ ПЕРВЫМ
-                if ((memory.getCollector() != zeroDot) && (memory.getCollector() == zero)) {
+                //ЭТО ЧТО БЫ ПРИ ОТОБРАЖЕНИИ НУЛЯ БЕЗ ТОЧКИ ОН НЕ ПИСАЛСЯ ПЕРВЫМ
+                if (memory.getCollector() == zero) {
                     memory.setCollector(empty)
+                }
+                // Условия для сбора числа без сброса колелктора после вычислений и нажатия на операцию
+                else if (memory.getMemory().isNotEmpty()
+                    && memory.getCollector().isEmpty()
+                    && memory.getEqualClicked()
+                ) {
+                    memory.setEqualClicked(false)
+                }
+                // Если были сделаны вычисления, то обнуляем строку что бы можно было собирать новое число
+                else if (memory.getMemory().isNotEmpty()
+                    && memory.getCollector().isNotEmpty()
+                    && memory.getEqualClicked()
+                ) {
+                    memory.setMemory(empty)
+                    memory.setCollector(empty)
+                    memory.setEqualClicked(false)
                 }
                 // СОБИРАЕМ НОВОЕ ЧИСЛО
                 memory.setCollector(memory.getCollector() + buttonText)
@@ -38,49 +52,45 @@ class Operations {
         }
 
         fun operationButtonClick(memory: Memory, buttonText: String) {
-            // Проверка если нет никаких данных, то просто поставить знак на малом экране
-            if (memory.getScreenText() == zero || memory.getScreenText() == zeroDot) {
-                memory.setOperationSign(buttonText.single())
-                memory.setSmallScreenText(memory.getOperationSign().toString())
-                memory.setMemory(zero)
-                // Обратобка второго нажатия. Когда нет второго операнда (тоесть коллектор пустой). Просто обновляем знак на экране
-            } else if (memory.getMemory().isNotEmpty() && memory.getCollector().isEmpty()
+            // После нажатия на равно, при нажатии на операцию, обнуляется коллектор. Что бы после равно продолжить вычисления
+            if (memory.getMemory().isNotEmpty()
+                && memory.getCollector().isNotEmpty()
+                && memory.getEqualClicked()
             ) {
+                memory.setOperationSign(buttonText.single())
+                memory.setCollector(empty)
+                memory.setSmallScreenText(memory.getMemory() + memory.getOperationSign())
+            }
+            // При втором нажатии производит вычисления и чистит коллектор
+            else if (memory.getMemory().isNotEmpty() && memory.getCollector().isNotEmpty()) {
+                memory.setMemory(calculateResult(memory))
+                memory.setCollector(empty)
                 memory.setOperationSign(buttonText.single())
                 memory.setSmallScreenText(memory.getMemory() + memory.getOperationSign())
-                // Если до этого не вводили никакое число и мемори пуст (или ноль), добавить в него коллектор, а коллектор обнулить.
-            } else if ((memory.getMemory().isEmpty() || memory.getMemory() == zero)
-                && memory.getCollector().isNotEmpty()
-            ) {
+
+            }
+            // Если до этого не вводили никакое число и мемори пуст, добавить в него коллектор, а коллектор чистим.
+            else if (memory.getMemory().isEmpty() && memory.getCollector().isNotEmpty()) {
                 memory.setOperationSign(buttonText.single())
                 memory.setMemory(memory.getCollector())
                 memory.setCollector(empty)
                 memory.setSmallScreenText(memory.getMemory() + memory.getOperationSign())
-                // При втором нажатии производит вычисления если не было нажато =
-            } else if (memory.getMemory().isNotEmpty() && memory.getCollector()
-                    .isNotEmpty() && !memory.getEqualClicked()
-            ) {
-                memory.setMemory(calculateResult(memory))
-                memory.setCollector(empty)
-                memory.setOperationSign(buttonText.single())
-                // Выводим результат на оба экрана
-                memory.setSmallScreenText(memory.getMemory() + memory.getOperationSign())
-                // Если после нажатия на равно нажать кнопку операций просто поменять знак.
-            } else if (memory.getMemory().isNotEmpty() && memory.getCollector()
-                    .isNotEmpty()
-            ) {
-                memory.setOperationSign(buttonText.single())
-                memory.setSmallScreenText(memory.getScreenText() + memory.getOperationSign())
-                memory.setCollector(empty)
             }
+            // Если после нажатия на операцию нажать кнопку операций просто поменять знак.
+            else if (memory.getMemory().isNotEmpty() && memory.getCollector().isEmpty()) {
+                memory.setOperationSign(buttonText.single())
+                memory.setSmallScreenText(memory.getMemory() + memory.getOperationSign())
+            }
+            // Если нажаты первыми, ничего не делать.
+            else if (memory.getMemory().isEmpty() && memory.getCollector().isEmpty()) {
+                memory.setSmallScreenText(memory.getOperationSign().toString())
+                memory.setMemory(zero)
+            }
+
             // Сбрасываем флаги точки и удаления
             memory.setDelClicked(false)
             memory.setDecimalClicked(false)
-
             // Устанавливаем флаг нажатой кнопки операций
-            memory.setOperationClicked(true)
-
-            // Выводим на экран мемори при любом нажатии на кнопку операции
             memory.setScreenText(memory.getMemory())
             // убираем флаг нажатого минуса
             memory.setMinusSignClicked(false)
@@ -98,12 +108,12 @@ class Operations {
                 )
                 // Считаем вычисления и копируем результат в memory.
                 memory.setMemory(calculateResult(memory))
-                // Выводим результат на оба экрана
+                // Выводим результат на экран
                 memory.setScreenText(memory.getMemory())
             }
             // Сбрасываем флаг точки, что бы можно было сразу набрать .0
             memory.setDecimalClicked(false)
-                // убираем флаг нажатого минуса
+            // убираем флаг нажатого минуса
             memory.setMinusSignClicked(false)
             // Устанавливаем флаг нажатия на =
             memory.setEqualClicked(true)
@@ -162,7 +172,6 @@ class Operations {
             memory.setScreenText("0")
             memory.setDecimalClicked(false)
             memory.setEqualClicked(false)
-            memory.setOperationClicked(false)
             memory.setSmallScreenText("")
             memory.setMinusSignClicked(false)
 
@@ -190,7 +199,7 @@ class Operations {
 
         private fun formatResult(result: Double): String {
 
-            val df = DecimalFormat("#.#####")
+            val df = DecimalFormat("#.####")
             df.roundingMode = RoundingMode.UP
             return df.format(result)
         }
@@ -214,15 +223,23 @@ class Operations {
         }
 
         fun addMinus(memory: Memory) {
-            // ПРоверяем что коллектор и экран совпадают, значит идет сбор числа и что - не был нажат
             val charToReplace = '-'
             val stringToReplace = memory.getCollector().replace(charToReplace.toString(), "")
-
-            if (memory.getCollector() == memory.getScreenText() && !memory.getMinusSignClicked() && memory.getCollector().isNotEmpty()) {
+            // обработка простого нажатия на кнопку когда ничего не было нажато
+            if (memory.getCollector().isEmpty() && memory.getMemory().isEmpty()) {
+                memory.setSmallScreenText(memory.getOperationSign().toString())
+                memory.setScreenText(zero)
+            }
+            // Проверяем что коллектор и экран совпадают, значит идет сбор числа и что - не был нажат
+            else if (memory.getCollector() == memory.getScreenText()
+                && !memory.getMinusSignClicked()
+                && memory.getCollector().isNotEmpty()
+            ) {
                 memory.setCollector("-" + memory.getCollector())
                 memory.setScreenText(memory.getCollector())
                 memory.setMinusSignClicked(true)
-            } else if (memory.getCollector() == memory.getScreenText() && memory.getMinusSignClicked()){
+                // Если был нажат - удаляем флаг и удаляем - из строки.
+            } else if (memory.getCollector() == memory.getScreenText() && memory.getMinusSignClicked()) {
                 memory.setCollector(stringToReplace)
                 memory.setScreenText(memory.getCollector())
                 memory.setMinusSignClicked(false)
