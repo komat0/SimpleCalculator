@@ -199,7 +199,7 @@ class Operations {
         }
 
         private fun formatResult(result: Double): String {
-            Locale.setDefault(Locale.US);
+            Locale.setDefault(Locale.US)
             val df = DecimalFormat("#.####")
             df.roundingMode = RoundingMode.UP
             return df.format(result)
