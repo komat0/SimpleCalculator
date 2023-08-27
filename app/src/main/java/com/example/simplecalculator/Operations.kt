@@ -6,6 +6,7 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import java.math.RoundingMode
 import java.text.DecimalFormat
+import java.util.Locale
 
 class Operations {
 
@@ -186,8 +187,8 @@ class Operations {
             return when (memory.getOperationSign()) {
                 '+' -> formatResult(operand1 + operand2)
                 '-' -> formatResult(operand1 - operand2)
-                '*' -> formatResult(operand1 * operand2)
-                '/' -> formatResult(divide(operand1, operand2))
+                '×' -> formatResult(operand1 * operand2)
+                '÷' -> formatResult(divide(operand1, operand2))
 
                 else -> ""
             }
@@ -198,7 +199,7 @@ class Operations {
         }
 
         private fun formatResult(result: Double): String {
-
+            Locale.setDefault(Locale.US);
             val df = DecimalFormat("#.####")
             df.roundingMode = RoundingMode.UP
             return df.format(result)
