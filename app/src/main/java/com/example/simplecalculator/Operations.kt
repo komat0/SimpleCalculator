@@ -32,7 +32,8 @@ class Operations {
                 }
                 // Условия для сбора числа без сброса колелктора после вычислений и нажатия на операцию
                 else if (memory.getMemory().isNotEmpty()
-                    && memory.getCollector().isEmpty()
+                    && (memory.getCollector().isEmpty()
+                            || memory.getCollector() == zeroDot)
                     && memory.getEqualClicked()
                 ) {
                     memory.setEqualClicked(false)
@@ -60,6 +61,7 @@ class Operations {
             ) {
                 memory.setOperationSign(buttonText.single())
                 memory.setCollector(empty)
+//                memory.setEqualClicked(false)
                 memory.setSmallScreenText(memory.getMemory() + memory.getOperationSign())
             }
             // При втором нажатии производит вычисления и чистит коллектор
