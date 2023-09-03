@@ -4,7 +4,6 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
-import java.math.RoundingMode
 import java.text.DecimalFormat
 import java.util.Locale
 
@@ -70,7 +69,6 @@ class Operations {
                 memory.setCollector(empty)
                 memory.setOperationSign(buttonText.single())
                 memory.setSmallScreenText(memory.getMemory() + memory.getOperationSign())
-
             }
             // Если до этого не вводили никакое число и мемори пуст, добавить в него коллектор, а коллектор чистим.
             else if (memory.getMemory().isEmpty() && memory.getCollector().isNotEmpty()) {
@@ -87,15 +85,12 @@ class Operations {
             // Если нажаты первыми, ничего не делать.
             else if (memory.getMemory().isEmpty() && memory.getCollector().isEmpty()) {
                 memory.setSmallScreenText(memory.getOperationSign().toString())
-                memory.setMemory(zero)
+                memory.setScreenText(zero)
             }
 
-            // Сбрасываем флаги точки и удаления
+            // Сбрасываем флаги точки, удаления и знака минус
             memory.setDelClicked(false)
             memory.setDecimalClicked(false)
-            // Устанавливаем флаг нажатой кнопки операций
-            memory.setScreenText(memory.getMemory())
-            // убираем флаг нажатого минуса
             memory.setMinusSignClicked(false)
         }
 
@@ -118,7 +113,7 @@ class Operations {
             memory.setDecimalClicked(false)
             // убираем флаг нажатого минуса
             memory.setMinusSignClicked(false)
-            // Устанавливаем флаг нажатия на =
+            // Устанавливаем флаг нажатия на кнопку =
             memory.setEqualClicked(true)
         }
 
@@ -203,7 +198,6 @@ class Operations {
         private fun formatResult(result: Double): String {
             Locale.setDefault(Locale.US)
             val df = DecimalFormat("#.####")
-            df.roundingMode = RoundingMode.UP
             return df.format(result)
         }
 
@@ -228,15 +222,9 @@ class Operations {
         fun addMinus(memory: Memory) {
             val charToReplace = '-'
             val stringToReplace = memory.getCollector().replace(charToReplace.toString(), "")
-            // обработка простого нажатия на кнопку когда ничего не было нажато
-            if (memory.getCollector().isEmpty() && memory.getMemory().isEmpty()) {
-                memory.setSmallScreenText(memory.getOperationSign().toString())
-                memory.setScreenText(zero)
-            }
             // Проверяем что коллектор и экран совпадают, значит идет сбор числа и что - не был нажат
-            else if (memory.getCollector() == memory.getScreenText()
+            if (memory.getCollector() == memory.getScreenText()
                 && !memory.getMinusSignClicked()
-                && memory.getCollector().isNotEmpty()
             ) {
                 memory.setCollector("-" + memory.getCollector())
                 memory.setScreenText(memory.getCollector())
