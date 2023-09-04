@@ -180,6 +180,12 @@ class Operations {
                 memory.getMemory().toDouble() else 0.0
             val operand2 = if (memory.getCollector().isNotEmpty())
                 memory.getCollector().toDouble() else 0.0
+            // Проверка деления на ноль
+            if (memory.getOperationSign() == '÷' && operand2 == 0.0) {
+                cleanButtonClick(memory)
+                memory.setSmallScreenText("Don't try to divide by 0")
+                return ""
+            }
 
             return when (memory.getOperationSign()) {
                 '+' -> formatResult(operand1 + operand2)
