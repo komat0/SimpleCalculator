@@ -204,7 +204,12 @@ class Operations {
         private fun formatResult(result: Double): String {
             Locale.setDefault(Locale.US)
             val df = DecimalFormat("#.####")
-            return df.format(result)
+            val formattedResult = if (result == 0.0) {
+                "0"
+            } else {
+                df.format(result)
+            }
+            return formattedResult
         }
 
         fun copyScreenToClipboard(context: Context, text: String) {
